@@ -27,6 +27,7 @@ public class Test7Outils {
                 .apiKey(apiKey)
                 .modelName(modelName)
                 .temperature(0.7)
+                .logRequestsAndResponses(true)
                 .build();
 
         System.out.println("Test 7 — Utilisation d'outils (modèle : " + modelName + ")");
