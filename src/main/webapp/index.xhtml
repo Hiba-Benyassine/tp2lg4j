@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:p="primefaces">
+<h:head>
+    <title>Chat LangChain4j</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <h:outputStylesheet library="css" name="mycsslayout.css"/>
+    <h:outputScript library="js" name="script.js" target="body"/>
+</h:head>
+<h:body>
+<main class="chat-page">
+    <header class="page-header">
+        <p class="eyebrow">EMSI · TP 2</p>
+        <h1>Chat avec un assistant IA</h1>
+        <p class="subtitle">Une conversation avec Gemini, propulsée par LangChain4j.</p>
+    </header>
+
+    <h:form id="chatForm">
+        <section class="role-row">
+            <p:outputLabel for="role" value="Rôle de l'API :"/>
+            <p:selectOneMenu id="role" value="#{bb.role}" styleClass="role-select">
+                <f:selectItem itemLabel="helpful assistant" itemValue="Tu es un assistant utile. Réponds clairement et précisément à la demande."/>
+                <f:selectItem itemLabel="Traducteur" itemValue="Tu es un traducteur. Traduis en anglais le texte envoyé par l'utilisateur, sans ajouter d'explication."/>
+                <f:selectItem itemLabel="Professeur LangChain4j" itemValue="Tu es un professeur qui explique clairement Java, Jakarta EE et LangChain4j."/>
+                <p:ajax event="change" listener="#{bb.changerRole}" process="@this" update="@form"/>
+            </p:selectOneMenu>
+        </section>
+
+        <p:messages id="messages" showDetail="true" closable="true"/>
+
+        <section class="chat-columns">
+            <div class="work-column">
+                <div class="section-heading">
+                    <p:outputLabel for="question" value="Question :"/>
+                    <div class="button-row compact">
+                        <p:commandButton type="button" value="Copier question"
+                                         onclick="copyTextarea('question'); return false;" styleClass="secondary-button"/>
+                        <p:commandButton value="Effacer question et réponse" action="#{bb.effacer}"
+                                         process="@this" update="@form" styleClass="secondary-button"/>
+                    </div>
+                </div>
+                <p:inputTextarea id="question" value="#{bb.question}" rows="5" autoResize="false"
+                                 maxlength="4000" styleClass="text-area question-area"/>
+                <p:commandButton value="Envoyer la question" action="#{bb.envoyer}"
+                                 process="@form" update="@form" styleClass="primary-button send-button"/>
+
+                <div class="section-heading response-heading">
+                    <p:outputLabel for="response" value="Réponse :"/>
+                    <p:commandButton type="button" value="Copier réponse"
+                                     onclick="copyTextarea('response'); return false;" styleClass="secondary-button"/>
+                </div>
+                <p:inputTextarea id="response" value="#{bb.response}" rows="12" autoResize="false"
+                                 readonly="true" styleClass="text-area response-area"/>
+            </div>
+
+            <div class="conversation-column">
+                <div class="section-heading">
+                    <h:outputLabel for="conversation" value="Conversation :"/>
+                    <p:commandButton type="button" value="Copier conversation"
+                                     onclick="copyTextarea('conversation'); return false;" styleClass="secondary-button"/>
+                </div>
+                <p:inputTextarea id="conversation" value="#{bb.conversation}" rows="25" autoResize="false"
+                                 readonly="true" styleClass="text-area conversation-area"/>
+            </div>
+        </section>
+    </h:form>
+</main>
+</h:body>
+</html>

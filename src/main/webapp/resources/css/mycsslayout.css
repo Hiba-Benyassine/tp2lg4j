@@ -1,0 +1,55 @@
+:root {
+    color-scheme: light;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #1d2b3a;
+    background: #f3f6fa;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    min-width: 320px;
+    background: #f3f6fa;
+}
+
+.chat-page {
+    width: min(1180px, calc(100% - 40px));
+    margin: 38px auto;
+    padding: 30px;
+    border: 1px solid #dce3ec;
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 12px 34px rgb(34 54 78 / 8%);
+}
+
+.page-header { margin-bottom: 24px; }
+.page-header h1 { margin: 4px 0 8px; font-size: 1.8rem; }
+.eyebrow { margin: 0; color: #4777ad; font-size: .76rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.subtitle { margin: 0; color: #617186; }
+
+.role-row { display: flex; align-items: center; gap: 14px; margin-bottom: 22px; font-weight: 600; }
+.role-select { min-width: 290px; }
+
+.chat-columns { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .95fr); gap: 22px; }
+.work-column, .conversation-column { min-width: 0; }
+.section-heading { display: flex; min-height: 38px; align-items: center; justify-content: space-between; gap: 10px; font-weight: 600; }
+.button-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.text-area { display: block; width: 100%; resize: vertical; border: 1px solid #cbd5e1; border-radius: 8px; padding: 12px; color: #26364a; font: 14px/1.55 Consolas, "Courier New", monospace; }
+.question-area { min-height: 116px; }
+.response-area { min-height: 260px; background: #f8fafc; }
+.conversation-area { min-height: 478px; background: #fcfdff; white-space: pre-wrap; }
+.send-button { margin: 12px 0 16px; }
+.p-button { border-radius: 7px; }
+.primary-button { background: #2268a9; border-color: #2268a9; }
+.secondary-button { background: #f7f9fc; border-color: #cbd5e1; color: #334155; }
+.response-heading { margin-top: 2px; }
+.p-messages { margin-bottom: 14px; }
+
+@media (max-width: 800px) {
+    .chat-page { width: calc(100% - 20px); margin: 10px auto; padding: 18px; }
+    .chat-columns { grid-template-columns: 1fr; }
+    .conversation-area { min-height: 300px; }
+    .role-row { align-items: flex-start; flex-direction: column; gap: 8px; }
+    .role-select { width: 100%; }
+}
