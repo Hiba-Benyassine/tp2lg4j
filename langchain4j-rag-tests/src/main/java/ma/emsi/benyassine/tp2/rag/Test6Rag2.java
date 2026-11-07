@@ -12,6 +12,8 @@ import dev.langchain4j.store.embedding.EmbeddingStoreIngestor;
 import dev.langchain4j.store.embedding.inmemory.InMemoryEmbeddingStore;
 
 import java.util.Scanner;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 /** Chat avec mémoire et RAG sur le support de cours LangChain4j. */
 public class Test6Rag2 {
@@ -20,10 +22,18 @@ public class Test6Rag2 {
             "Quel est l'objectif du cours 'Agents conversationnels en Java avec LangChain4j' de Richard Grin ?";
 
     public static void main(String[] args) {
+        Path coursePath = Path.of("langchain4j.pdf");
+        if (!Files.exists(coursePath)) {
+            coursePath = Path.of("langchain4j-rag-tests", "langchain4j.pdf");
+        }
+        Document course = FileSystemDocumentLoader.loadDocument(coursePath);
+        InMemoryEmbeddingStore<TextSegment> embeddingStore = new InMemoryEmbeddingStore<>();
+        EmbeddingStoreIngestor.ingest(course, embeddingStore);
+        System.out.println("Le PDF a été découpé en segments et indexé en mémoire.");
+
         String apiKey = System.getenv("GOOGLE_AI_GEMINI_API_KEY");
         if (apiKey == null || apiKey.isBlank()) {
-            System.err.println("La variable d'environnement GOOGLE_AI_GEMINI_API_KEY n'est pas définie.");
-            System.err.println("Ajoutez votre clé Gemini dans la configuration d'exécution IntelliJ, sans la committer.");
+            System.out.println("Pour poser des questions au modèle, configurez GOOGLE_AI_GEMINI_API_KEY dans IntelliJ.");
             return;
         }
 
@@ -35,11 +45,6 @@ public class Test6Rag2 {
                 .build();
 
         System.out.println("Test 6 — RAG sur le support PDF (modèle : " + modelName + ")");
-        Document course = FileSystemDocumentLoader.loadDocument("langchain4j.pdf");
-        InMemoryEmbeddingStore<TextSegment> embeddingStore = new InMemoryEmbeddingStore<>();
-        EmbeddingStoreIngestor.ingest(course, embeddingStore);
-        System.out.println("Le PDF a été découpé en segments et indexé en mémoire.");
-
         Assistant assistant = AiServices.builder(Assistant.class)
                 .chatModel(model)
                 .chatMemory(MessageWindowChatMemory.withMaxMessages(20))

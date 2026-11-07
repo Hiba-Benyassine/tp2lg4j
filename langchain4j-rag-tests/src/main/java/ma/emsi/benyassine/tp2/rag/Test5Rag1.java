@@ -12,6 +12,8 @@ import dev.langchain4j.store.embedding.EmbeddingStoreIngestor;
 import dev.langchain4j.store.embedding.inmemory.InMemoryEmbeddingStore;
 
 import java.util.Scanner;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 /** Compare une réponse Gemini sans document avec un assistant RAG sur infos.txt. */
 public class Test5Rag1 {
@@ -19,10 +21,18 @@ public class Test5Rag1 {
     private static final String QUESTION_CHAT = "Comment s'appelle le chat de Pierre ?";
 
     public static void main(String[] args) {
+        Path infoPath = Path.of("infos.txt");
+        if (!Files.exists(infoPath)) {
+            infoPath = Path.of("langchain4j-rag-tests", "infos.txt");
+        }
+        Document document = FileSystemDocumentLoader.loadDocument(infoPath);
+        InMemoryEmbeddingStore<TextSegment> embeddingStore = new InMemoryEmbeddingStore<>();
+        EmbeddingStoreIngestor.ingest(document, embeddingStore);
+        System.out.println("Le document infos.txt a été indexé en mémoire.");
+
         String apiKey = System.getenv("GOOGLE_AI_GEMINI_API_KEY");
         if (apiKey == null || apiKey.isBlank()) {
-            System.err.println("La variable d'environnement GOOGLE_AI_GEMINI_API_KEY n'est pas définie.");
-            System.err.println("Ajoutez votre clé Gemini dans la configuration d'exécution IntelliJ, sans la committer.");
+            System.out.println("Pour obtenir les réponses RAG, configurez GOOGLE_AI_GEMINI_API_KEY dans IntelliJ.");
             return;
         }
 
@@ -35,10 +45,6 @@ public class Test5Rag1 {
 
         System.out.println("Test 5 — RAG 1 (modèle : " + modelName + ")");
         System.out.println("Sans document : " + model.chat(QUESTION_CHAT));
-
-        Document document = FileSystemDocumentLoader.loadDocument("infos.txt");
-        InMemoryEmbeddingStore<TextSegment> embeddingStore = new InMemoryEmbeddingStore<>();
-        EmbeddingStoreIngestor.ingest(document, embeddingStore);
 
         Assistant assistant = AiServices.builder(Assistant.class)
                 .chatModel(model)

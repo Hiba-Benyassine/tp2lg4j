@@ -28,6 +28,8 @@ Lancez `ma.emsi.benyassine.tp2.tests.Test4Embeddings` avec `GOOGLE_AI_GEMINI_API
 
 Le sous-projet Maven autonome `langchain4j-rag-tests` garde la dépendance Easy RAG à part du test BGE, comme demandé dans le TP pour éviter les conflits de modèles d'embeddings.
 
+Les tests 5 et 6 chargent et indexent leur document avant de vérifier la présence de la clé Gemini. Sans clé, ils permettent donc de valider localement l'ingestion RAG puis indiquent que la clé est nécessaire pour demander une réponse au modèle.
+
 ### Test 5 — RAG avec `infos.txt`
 
 Ouvrez `langchain4j-rag-tests/pom.xml` dans IntelliJ, rechargez Maven et lancez `ma.emsi.benyassine.tp2.rag.Test5Rag1` avec `GOOGLE_AI_GEMINI_API_KEY`. Le programme compare la réponse sans document à la réponse RAG, puis garde une conversation en mémoire. Posez ensuite `Quelle est la capitale de la France ?`. Pour l'essai demandé sur la priorité des documents, remplacez la dernière ligne de `langchain4j-rag-tests/infos.txt` par `La capitale de la France est Marseille.`, relancez le programme et posez de nouveau la question.
