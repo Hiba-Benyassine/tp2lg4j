@@ -8,9 +8,11 @@ import dev.langchain4j.agent.tool.Tool;
 
 import java.io.IOException;
 import java.net.URI;
+import java.net.URLEncoder;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.util.Locale;
 
@@ -21,6 +23,41 @@ public class MeteoTool {
     private static final HttpClient HTTP = HttpClient.newBuilder()
             .connectTimeout(Duration.ofSeconds(10))
             .build();
+
+    @Tool("Trouve la latitude et la longitude d'une ville pour permettre une recherche météo. Le nom du pays peut être ajouté en anglais, par exemple Rabat,Morocco.")
+    public String rechercheCoordonnees(
+            @P("Nom de la ville, en anglais, avec le pays en anglais si nécessaire.") String nomVille) {
+        if (nomVille == null || nomVille.isBlank()) {
+            return "Le nom de la ville est vide.";
+        }
+
+        String encodedCity = URLEncoder.encode(nomVille.trim(), StandardCharsets.UTF_8);
+        String url = "https://geocoding-api.open-meteo.com/v1/search?name=" + encodedCity
+                + "&count=1&language=en&format=json";
+        try {
+            JsonObject root = getJson(url);
+            JsonArray results = root.getAsJsonArray("results");
+            if (results == null || results.isEmpty()) {
+                return "Aucune ville trouvée pour : " + nomVille;
+            }
+
+            JsonObject city = results.get(0).getAsJsonObject();
+            String name = city.get("name").getAsString();
+            String country = city.has("country") ? city.get("country").getAsString() : "pays inconnu";
+            double latitude = city.get("latitude").getAsDouble();
+            double longitude = city.get("longitude").getAsDouble();
+            return String.format(Locale.ROOT,
+                    "Coordonnées de %s, %s : latitude %.5f, longitude %.5f.",
+                    name, country, latitude, longitude);
+        } catch (IOException e) {
+            return "Impossible de géolocaliser cette ville : " + e.getMessage();
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            return "La géolocalisation a été interrompue.";
+        } catch (RuntimeException e) {
+            return "La réponse de géolocalisation n'a pas pu être interprétée : " + e.getMessage();
+        }
+    }
 
     @Tool("Consulte les probabilités maximales de pluie pour les trois prochains jours à partir de coordonnées GPS.")
     public String isPluiePrevue(

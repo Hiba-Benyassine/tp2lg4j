@@ -39,3 +39,5 @@ Le fichier `langchain4j.pdf` fourni par le professeur est à la racine du sous-p
 ### Test 7 — Outil météo sur coordonnées
 
 `TestMeteo` appelle directement Open-Meteo pour Paris (48.85, 2.35). `Test7Outils` pose d'abord la question météo sans outil, puis ouvre un chat avec l'outil météo et une mémoire de 20 messages. Posez la question exemple du parapluie, une question sans rapport avec la météo, puis d'autres questions de l'énoncé. Les prévisions sont celles des trois dates renvoyées par Open-Meteo ; le seuil de pluie est fixé à 40 %.
+
+La classe `MeteoTool` expose aussi `rechercheCoordonnees`, qui géolocalise une ville (en anglais, avec son pays si besoin) avant que l'assistant appelle l'outil de prévisions. Testez notamment Paris, une ville inconnue comme Zzyzx et une question sans rapport avec la météo.

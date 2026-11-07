@@ -38,8 +38,9 @@ public class Test7Outils {
                 .tools(new MeteoTool())
                 .build();
 
-        System.out.println("\nAvec l'outil météo sur coordonnées :");
+        System.out.println("\nAvec l'outil météo sur coordonnées ou nom de ville :");
         System.out.println("Exemple : " + QUESTION_EXEMPLE);
+        System.out.println("Vous pouvez aussi demander la météo par nom de ville, par exemple Paris.");
         System.out.println("Posez d'autres questions. Saisissez /quit pour terminer.");
         try (Scanner scanner = new Scanner(System.in)) {
             while (true) {
