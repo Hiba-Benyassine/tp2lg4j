@@ -19,3 +19,7 @@ Dans `Test1`, posez la question `Pourquoi le ciel est-il bleu ?`, puis lancez `m
 ### Test 3 — Traducteur avec templates
 
 Lancez `ma.emsi.benyassine.tp2.tests.Test3Traducteur` avec `GOOGLE_AI_GEMINI_API_KEY`. Saisissez un texte, puis une langue pour la seconde traduction. Le programme envoie le même texte à Gemini avec un template à une variable (anglais) puis avec un template à deux variables (langue et texte).
+
+### Test 4 — Embeddings et similarité
+
+Lancez `ma.emsi.benyassine.tp2.tests.Test4Embeddings` avec `GOOGLE_AI_GEMINI_API_KEY`. Le programme compare six couples de phrases françaises avec le modèle BGE local puis avec `gemini-embedding-001`, en mode `SEMANTIC_SIMILARITY`. Il utilise le cosinus pour afficher les scores. Le modèle Google traite les douze phrases par lot afin de limiter les appels réseau.
