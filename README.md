@@ -35,3 +35,7 @@ Ouvrez `langchain4j-rag-tests/pom.xml` dans IntelliJ, rechargez Maven et lancez 
 ### Test 6 — RAG avec le support PDF
 
 Le fichier `langchain4j.pdf` fourni par le professeur est à la racine du sous-projet. Lancez `ma.emsi.benyassine.tp2.rag.Test6Rag2` avec `GOOGLE_AI_GEMINI_API_KEY`. Le PDF est découpé en segments indexés dans un magasin vectoriel en mémoire ; l'assistant garde les 20 derniers messages. Le programme pose la question exemple du TP, puis accepte d'autres questions jusqu'à `/quit`.
+
+### Test 7 — Outil météo sur coordonnées
+
+`TestMeteo` appelle directement Open-Meteo pour Paris (48.85, 2.35). `Test7Outils` pose d'abord la question météo sans outil, puis ouvre un chat avec l'outil météo et une mémoire de 20 messages. Posez la question exemple du parapluie, une question sans rapport avec la météo, puis d'autres questions de l'énoncé. Les prévisions sont celles des trois dates renvoyées par Open-Meteo ; le seuil de pluie est fixé à 40 %.
