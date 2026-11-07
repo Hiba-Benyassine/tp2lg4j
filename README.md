@@ -31,3 +31,7 @@ Le sous-projet Maven autonome `langchain4j-rag-tests` garde la dépendance Easy 
 ### Test 5 — RAG avec `infos.txt`
 
 Ouvrez `langchain4j-rag-tests/pom.xml` dans IntelliJ, rechargez Maven et lancez `ma.emsi.benyassine.tp2.rag.Test5Rag1` avec `GOOGLE_AI_GEMINI_API_KEY`. Le programme compare la réponse sans document à la réponse RAG, puis garde une conversation en mémoire. Posez ensuite `Quelle est la capitale de la France ?`. Pour l'essai demandé sur la priorité des documents, remplacez la dernière ligne de `langchain4j-rag-tests/infos.txt` par `La capitale de la France est Marseille.`, relancez le programme et posez de nouveau la question.
+
+### Test 6 — RAG avec le support PDF
+
+Le fichier `langchain4j.pdf` fourni par le professeur est à la racine du sous-projet. Lancez `ma.emsi.benyassine.tp2.rag.Test6Rag2` avec `GOOGLE_AI_GEMINI_API_KEY`. Le PDF est découpé en segments indexés dans un magasin vectoriel en mémoire ; l'assistant garde les 20 derniers messages. Le programme pose la question exemple du TP, puis accepte d'autres questions jusqu'à `/quit`.
