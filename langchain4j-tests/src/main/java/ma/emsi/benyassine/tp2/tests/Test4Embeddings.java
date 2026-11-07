@@ -14,12 +14,12 @@ import java.util.List;
 public class Test4Embeddings {
 
     private static final List<String[]> PAIRS = List.of(
-            new String[]{"Le chat dort sur le canapé.", "Un félin se repose sur le sofa."},
-            new String[]{"La température augmente rapidement.", "La température diminue rapidement."},
-            new String[]{"J'aime lire des romans le soir.", "La lecture de romans me détend le soir."},
-            new String[]{"Le train arrive à la gare à midi.", "Les tomates poussent dans le jardin."},
-            new String[]{"Rabat est la capitale du Maroc.", "La capitale marocaine est Rabat."},
-            new String[]{"Elle a acheté une voiture neuve.", "Elle a vendu son ancienne voiture."}
+            new String[]{"Le chat dort sur le canapé.", "Le chat se repose sur le canapé."},
+            new String[]{"Le four est chaud.", "Le congélateur est froid."},
+            new String[]{"Rabat est la capitale du Maroc.", "Rabat est la ville capitale marocaine."},
+            new String[]{"Le train arrive à la gare à midi.", "Une recette de soupe demande des tomates fraîches."},
+            new String[]{"J'aime lire des romans le soir.", "Lire des romans le soir me fait plaisir."},
+            new String[]{"Le soleil éclaire la pièce.", "La pièce reste plongée dans l'obscurité."}
     );
 
     public static void main(String[] args) {
