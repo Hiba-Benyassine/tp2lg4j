@@ -45,3 +45,9 @@ La classe `MeteoTool` expose aussi `rechercheCoordonnees`, qui géolocalise une 
 Le logging Logback est activé pour LangChain4j et le modèle Gemini journalise les requêtes et réponses. Pour analyser les appels d'outils, relancez `Test7Outils` pour repartir avec une mémoire neuve, demandez la météo de Zzyzx, puis examinez dans la console les nouvelles parties JSON : la réponse du modèle contenant l'appel de fonction, l'exécution locale par l'application, puis la réponse de l'outil renvoyée au modèle. Distinguez les requêtes envoyées par l'application à Gemini des réponses reçues de Gemini. Ne recopiez pas les messages répétés qui correspondent à l'historique.
 
 Pour le compte rendu demandé par le professeur, conservez vos réponses Gemini réelles et les scores d'embeddings obtenus. Pour Test 7, notez aussi le résultat sans outil, les échanges sur Paris et Zzyzx, puis les parties JSON liées aux deux outils. Une économie de tokens possible consiste à fusionner la géolocalisation et la prévision dans un seul outil qui prend un nom de ville et renvoie directement les dates et probabilités ; cela réduit le nombre d'aller-retours avec le modèle.
+
+## Application Web JSF
+
+Le projet Maven à la racine est l'application Web Jakarta EE 11 avec JSF et PrimeFaces. Ouvrez le `pom.xml` racine dans IntelliJ et rechargez Maven. Configurez `GOOGLE_AI_GEMINI_API_KEY` dans l'environnement du serveur Jakarta EE, puis construisez le fichier WAR avec `mvn package` et déployez-le sur un serveur compatible Jakarta EE 11. La page d'accueil est `index.xhtml`.
+
+Le menu propose un assistant utile, un traducteur et un professeur LangChain4j. Changer de rôle démarre une nouvelle conversation et efface la mémoire précédente. La classe `LlmClient` garde jusqu'à 20 messages via `MessageWindowChatMemory`, et la vue affiche séparément la question, la réponse et l'historique.

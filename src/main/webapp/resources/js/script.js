@@ -1,6 +1,7 @@
 function copyTextarea(suffix) {
     const element = Array.from(document.querySelectorAll("textarea"))
-        .find((textarea) => textarea.id.endsWith(":" + suffix));
+        .find((textarea) => textarea.id.split(":")
+            .some((part) => part === suffix || part === suffix + "_input"));
     if (!element) {
         return;
     }
