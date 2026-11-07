@@ -23,3 +23,11 @@ Lancez `ma.emsi.benyassine.tp2.tests.Test3Traducteur` avec `GOOGLE_AI_GEMINI_API
 ### Test 4 — Embeddings et similarité
 
 Lancez `ma.emsi.benyassine.tp2.tests.Test4Embeddings` avec `GOOGLE_AI_GEMINI_API_KEY`. Le programme compare six couples de phrases françaises avec le modèle BGE local puis avec `gemini-embedding-001`, en mode `SEMANTIC_SIMILARITY`. Il utilise le cosinus pour afficher les scores. Le modèle Google traite les douze phrases par lot afin de limiter les appels réseau.
+
+## Tests RAG
+
+Le sous-projet Maven autonome `langchain4j-rag-tests` garde la dépendance Easy RAG à part du test BGE, comme demandé dans le TP pour éviter les conflits de modèles d'embeddings.
+
+### Test 5 — RAG avec `infos.txt`
+
+Ouvrez `langchain4j-rag-tests/pom.xml` dans IntelliJ, rechargez Maven et lancez `ma.emsi.benyassine.tp2.rag.Test5Rag1` avec `GOOGLE_AI_GEMINI_API_KEY`. Le programme compare la réponse sans document à la réponse RAG, puis garde une conversation en mémoire. Posez ensuite `Quelle est la capitale de la France ?`. Pour l'essai demandé sur la priorité des documents, remplacez la dernière ligne de `langchain4j-rag-tests/infos.txt` par `La capitale de la France est Marseille.`, relancez le programme et posez de nouveau la question.
