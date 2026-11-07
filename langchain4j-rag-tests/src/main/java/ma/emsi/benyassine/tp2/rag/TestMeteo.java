@@ -4,6 +4,8 @@ package ma.emsi.benyassine.tp2.rag;
 public class TestMeteo {
 
     public static void main(String[] args) {
-        System.out.println(new MeteoTool().isPluiePrevue(48.85, 2.35));
+        MeteoTool meteoTool = new MeteoTool();
+        System.out.println("Géolocalisation directe : " + meteoTool.rechercheCoordonnees("Paris"));
+        System.out.println("Prévisions météo directes : " + meteoTool.isPluiePrevue(48.85, 2.35));
     }
 }

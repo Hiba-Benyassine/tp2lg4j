@@ -23,19 +23,18 @@ public class Test4Embeddings {
     );
 
     public static void main(String[] args) {
-        String apiKey = System.getenv("GOOGLE_AI_GEMINI_API_KEY");
-        if (apiKey == null || apiKey.isBlank()) {
-            System.err.println("La variable d'environnement GOOGLE_AI_GEMINI_API_KEY n'est pas définie.");
-            System.err.println("Ajoutez votre clé Gemini dans la configuration d'exécution IntelliJ, sans la committer.");
-            return;
-        }
-
         List<String> phrases = PAIRS.stream()
                 .flatMap(pair -> List.of(pair[0], pair[1]).stream())
                 .toList();
 
         EmbeddingModel localModel = new BgeSmallEnV15EmbeddingModel();
         printSimilarities("BGE Small EN v1.5 (local)", localModel, phrases);
+
+        String apiKey = System.getenv("GOOGLE_AI_GEMINI_API_KEY");
+        if (apiKey == null || apiKey.isBlank()) {
+            System.out.println("Pour comparer avec Google Gemini, configurez GOOGLE_AI_GEMINI_API_KEY dans IntelliJ.");
+            return;
+        }
 
         EmbeddingModel googleModel = GoogleGenAiEmbeddingModel.builder()
                 .apiKey(apiKey)
