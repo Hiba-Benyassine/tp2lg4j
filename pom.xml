@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ma.emsi.benyassine.tp2</groupId>
-    <artifactId>tp2lg4j-web</artifactId>
+    <artifactId>tp2</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>TP 2 LangChain4j — Application Web</name>
     <packaging>war</packaging>

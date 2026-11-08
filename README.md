@@ -50,6 +50,6 @@ Pour le compte rendu demandé par le professeur, conservez vos réponses Gemini 
 
 ## Application Web JSF
 
-Le projet Maven à la racine est l'application Web Jakarta EE 11 avec JSF et PrimeFaces. Ouvrez le `pom.xml` racine dans IntelliJ et rechargez Maven. Configurez `GOOGLE_AI_GEMINI_API_KEY` dans l'environnement du serveur Jakarta EE, puis construisez le fichier WAR avec `mvn package` et déployez-le sur un serveur compatible Jakarta EE 11. La page d'accueil est `index.xhtml`.
+Le projet Maven à la racine est l'application Web Jakarta EE 11 avec JSF et PrimeFaces. Ouvrez le `pom.xml` racine dans IntelliJ et rechargez Maven. Configurez `GOOGLE_AI_GEMINI_API_KEY` dans l'environnement du serveur Jakarta EE, puis construisez `target/tp2-1.0-SNAPSHOT.war` avec `mvn package` et déployez-le sur un serveur compatible Jakarta EE 11. La page d'accueil est `index.xhtml`.
 
 Le menu propose un assistant utile, un traducteur et un professeur LangChain4j. Changer de rôle démarre une nouvelle conversation et efface la mémoire précédente. La classe `LlmClient` garde jusqu'à 20 messages via `MessageWindowChatMemory`, et la vue affiche séparément la question, la réponse et l'historique.
